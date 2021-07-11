@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  easybio:
+    image: easybio-arm:1.0.0
+    ports: 
+      - 8000:8000
+    volumes: 
+      - ~/docker/easybio/app:/app/
+    restart: unless-stopped
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    devices:
+      - "/dev/video0:/dev/video0"
+    runtime:
+      - nvidia
